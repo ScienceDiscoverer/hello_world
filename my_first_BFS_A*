@@ -1,3 +1,6 @@
+// This implementation was made for codingame.com site for Hard pazzle "The Labirinth"!
+// It will not work without spesific input!
+
 #include <iostream>
 #include <string>
 #include <queue>
