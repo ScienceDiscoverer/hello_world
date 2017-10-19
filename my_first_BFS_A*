@@ -1,0 +1,224 @@
+#include <iostream>
+#include <string>
+#include <queue>
+#include <list>
+#include <cmath>
+
+using namespace std;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+
+struct node
+{
+    pair<int,int> pos;
+    node* parent;
+    float f, g, h; // arguments for A*
+    node(int x, int y)
+    {
+        pos.first = x;
+        pos.second = y;
+        parent = 0;
+        f = g = h = 0;
+    }
+    node(){}
+};
+
+bool checkList(list<node> &lis, node &test) // check list for better node (for A*)
+{
+    for(list<node>::iterator it=lis.begin(); it != lis.end(); ++it)
+    {
+        node tmp = *it;
+        if(tmp.pos.first == test.pos.first && tmp.pos.second == test.pos.second && tmp.f <= test.f)
+            return true;
+    }
+    return false;
+}
+
+node BFS(string MAZE[], list<node> &chnod, node &start, char fin) // Breadth First Search
+{
+    queue<node> nodq; //nodes queue (BFS)
+    nodq.push(start);
+    
+    while(!nodq.empty())
+    {
+        node tmp = nodq.front();
+        nodq.pop();
+        cerr << nodq.size() << endl;
+        chnod.push_front(tmp);
+        node sucs[4]; // sucsessors
+        //generate sucsessors
+        sucs[0].pos = make_pair(tmp.pos.first+1, tmp.pos.second);
+        sucs[1].pos = make_pair(tmp.pos.first-1, tmp.pos.second);
+        sucs[2].pos = make_pair(tmp.pos.first, tmp.pos.second+1);
+        sucs[3].pos = make_pair(tmp.pos.first, tmp.pos.second-1);
+        //sucs[4].pos = make_pair(tmp.pos.first+1, tmp.pos.second+1); don't need 8 sucsessors
+        //sucs[5].pos = make_pair(tmp.pos.first-1, tmp.pos.second-1); Kirk can move only in
+        //sucs[6].pos = make_pair(tmp.pos.first+1, tmp.pos.second-1); 4 directions!
+        //sucs[7].pos = make_pair(tmp.pos.first-1, tmp.pos.second+1);
+        for(int i = 0; i < 4; ++i)
+            sucs[i].parent = &chnod.front();
+    
+        for(node suc: sucs)
+        {
+            if(MAZE[suc.pos.second][suc.pos.first] == fin)
+                return suc;
+            else if(MAZE[suc.pos.second][suc.pos.first] != '#')
+            {
+                bool nodechecked = false;
+                for(list<node>::iterator it=chnod.begin(); it != chnod.end(); ++it)
+                {
+                    tmp = *it;
+                    if(tmp.pos.first == suc.pos.first && tmp.pos.second == suc.pos.second)
+                    {
+                        nodechecked = true;
+                        break;
+                    }
+                }
+                if(!nodechecked){ nodq.push(suc);
+                cerr << suc.pos.first << '-' << suc.pos.second << " <--> " <<
+                MAZE[suc.pos.second][suc.pos.first] << endl;
+                }
+            }
+        }
+        cerr << "<--------------->" << endl;
+        if(nodq.size() > 167) return node(-1, -1); // if search is taking too long, stop searching
+    }
+    return node(-1, -1); //if no goal found, return impossible node
+}
+
+int main()
+{
+    int R; // number of rows.
+    int C; // number of columns.
+    int A; // number of rounds between the time the alarm countdown is activated and the time the alarm goes off.
+    cin >> R >> C >> A; cin.ignore();
+    node tele(0, 0); // teleporter aka goal for A*
+    bool roundstarted = false, control = false;
+    
+    // game loop
+    while(1)
+    {
+        int KR; // row where Kirk is located.
+        int KC; // column where Kirk is located.
+        cin >> KR >> KC; cin.ignore();
+        string maze[R];
+        for(int i = 0; i < R; ++i)
+            cin >> maze[i]; cin.ignore(); // C of the characters in '#.TC?' (i.e. one line of the ASCII maze).
+        
+        if(!roundstarted) // remember teleporter position (for A*)
+            tele.pos = make_pair(KC, KR);
+        
+        roundstarted = true;
+        if(maze[KR][KC] == 'C') control = true; // check if control room reached
+        
+        //////////////////////// Draw Maze for debug
+        for(int i = 0; i < R; ++i)
+            cerr << maze[i] << endl;
+        //////////////////////// FogOfWarChecker
+        int fog = 0;
+        for(auto a: maze)
+        {
+            for(auto b: a){
+                if(b == '?') ++fog;}
+        }
+        cerr << "FogOfWar left: " << fog << endl;
+        //////////////////////// FogOfWarChecker
+        
+        node kirk_start(KC, KR), goal(-1, -1);
+        
+        list<node> chnods; //checked nodes (BFS/A*)
+        list<node> openlist; // A*
+        list<node> closelist; // A*
+        
+        if(!control) // control room not found yet ---> BFS
+        {
+            goal = BFS(maze, chnods, kirk_start, '?');
+            chnods.clear();
+            if(goal.pos.first == -1)
+                goal = BFS(maze, chnods, kirk_start, 'C');
+        }
+        else // control room found ---> A*
+        {
+            chnods.clear();
+            openlist.push_front(kirk_start);
+            
+            while(!openlist.empty())
+            {
+                list<node>::iterator smallest = openlist.begin();
+                for(list<node>::iterator it=openlist.begin(); it != openlist.end(); ++it)
+                {
+                    node itnod, smallestnod;
+                    itnod = *it;
+                    smallestnod = *smallest;
+                    if(itnod.f < smallestnod.f)
+                        smallest = it;
+                }
+                node q = *smallest;
+                //cerr << "smalest f: " << q.f << endl;
+                //cerr << "olist before pop: " << openlist.size() << endl;
+                openlist.erase(smallest);
+                //cerr << "olist after pop: " << openlist.size() << endl;
+                chnods.push_front(q);
+                
+                node sucs[4]; // sucsessors
+                //generate sucsessors
+                sucs[0].pos = make_pair(q.pos.first+1, q.pos.second);
+                sucs[1].pos = make_pair(q.pos.first-1, q.pos.second);
+                sucs[2].pos = make_pair(q.pos.first, q.pos.second+1);
+                sucs[3].pos = make_pair(q.pos.first, q.pos.second-1);
+                for(int i = 0; i < 4; ++i)
+                    sucs[i].parent = &chnods.front();
+                
+                for(node suc: sucs)
+                {
+                    if(maze[suc.pos.second][suc.pos.first] == 'T')
+                    {
+                        goal = suc;
+                        break;
+                    }
+                    suc.g = q.g + 1; // sucsessor cost
+                    int x = suc.pos.first - tele.pos.first;
+                    int y = suc.pos.second - tele.pos.second;
+                    suc.h = sqrt(pow(x, 2) + pow(y, 2)); //distance between sucsessor and goal
+                    suc.f = suc.g + suc.h;
+                    
+                    bool notwall = maze[suc.pos.second][suc.pos.first] != '#';
+                    if(!checkList(openlist, suc) && !checkList(closelist, suc) && notwall)
+                        openlist.push_front(suc);
+                }
+                
+                closelist.push_front(q);
+                if(goal.pos.first != -1) break;
+            }
+        }
+        
+        string MOVE;
+        if(goal.pos.first != -1)
+        {
+            while(goal.parent != 0)
+            {
+                node tmp = *goal.parent;
+                if(tmp.pos.first < goal.pos.first)
+                    MOVE = "RIGHT";
+                else if(tmp.pos.first > goal.pos.first)
+                    MOVE = "LEFT";
+                else
+                {
+                    if(tmp.pos.second < goal.pos.second)
+                        MOVE = "DOWN";
+                    else
+                        MOVE = "UP";
+                }
+                goal = tmp;
+            }
+        }
+
+        // Write an action using cout. DON'T FORGET THE "<< endl"
+        // To debug: cerr << "Debug messages..." << endl;
+        
+        cout << MOVE << endl; // Kirk's next move (UP DOWN LEFT or RIGHT).
+    }
+}
