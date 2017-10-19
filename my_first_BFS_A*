@@ -80,13 +80,9 @@ node BFS(string MAZE[], list<node> &chnod, node &start, char fin) // Breadth Fir
                         break;
                     }
                 }
-                if(!nodechecked){ nodq.push(suc);
-                cerr << suc.pos.first << '-' << suc.pos.second << " <--> " <<
-                MAZE[suc.pos.second][suc.pos.first] << endl;
-                }
+                if(!nodechecked) nodq.push(suc);
             }
         }
-        cerr << "<--------------->" << endl;
         if(nodq.size() > 167) return node(-1, -1); // if search is taking too long, stop searching
     }
     return node(-1, -1); //if no goal found, return impossible node
@@ -160,10 +156,7 @@ int main()
                         smallest = it;
                 }
                 node q = *smallest;
-                //cerr << "smalest f: " << q.f << endl;
-                //cerr << "olist before pop: " << openlist.size() << endl;
                 openlist.erase(smallest);
-                //cerr << "olist after pop: " << openlist.size() << endl;
                 chnods.push_front(q);
                 
                 node sucs[4]; // sucsessors
