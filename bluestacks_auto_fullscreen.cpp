@@ -13,16 +13,16 @@ int main()
 	
 	// Create Process ============================================================================
 	BOOL res = CreateProcess(
-		app,	// [I|O]  Name of the module to be executed, that's it
-		NULL,	// [IO|O] Command line to be exectued, searches PATH, adds extention
-		NULL,	// [I|O]  Sec. Attrib. for inhereting new process by child processes
-		NULL,	// [I|O]  Sec. Attrib. for inhereting new thread by child processes
-		FALSE,	// [I]    New proc. inherits each inheritable handle
-		NULL,	// [I]    Process creation flags
-		NULL,	// [I|O]  Ptr to environment block of new process (inherit if NULL)
-		NULL,	// [I|O]  Full path to current directory for the process
-		&si,	// [I]    Ptr to STARTUPINFO struct, if dwFlags = 0, def. values used
-		&pi	// [O]    Ptr to PROCESS_INFORMATION struct with new proc identification info
+		app,	//  [I|O]  Name of the module to be executed, that's it
+		NULL,	// [IO|O]  Command line to be exectued, searches PATH, adds extention
+		NULL,	//  [I|O]  Sec. Attrib. for inhereting new process by child processes
+		NULL,	//  [I|O]  Sec. Attrib. for inhereting new thread by child processes
+		FALSE,	//    [I]  New proc. inherits each inheritable handle
+		NULL,	//    [I]  Process creation flags
+		NULL,	//  [I|O]  Ptr to environment block of new process (inherit if NULL)
+		NULL,	//  [I|O]  Full path to current directory for the process
+		&si,	//    [I]  Ptr to STARTUPINFO struct, if dwFlags = 0, def. values used
+		&pi	//    [O]  Ptr to PROCESS_INFORMATION struct with new proc identification info
 	);
 	// ===========================================================================================
 	
@@ -48,7 +48,7 @@ int main()
 	inps[1].ki.wScan = 0x57; // F11
 	inps[1].ki.dwFlags = KEYEVENTF_SCANCODE | KEYEVENTF_KEYUP;
 	
-	UINT inject_res = SendInput(4, inps, sizeof(INPUT));
+	SendInput(4, inps, sizeof(INPUT));
 	
 	return 0;
 }
