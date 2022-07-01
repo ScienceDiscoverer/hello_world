@@ -22,7 +22,7 @@ int main()
 		NULL,	// [I|O]  Ptr to environment block of new process (inherit if NULL)
 		NULL,	// [I|O]  Full path to current directory for the process
 		&si,	// [I]    Ptr to STARTUPINFO struct, if dwFlags = 0, def. values used
-		&pi		// [O]    Ptr to PROCESS_INFORMATION struct with new proc identification info
+		&pi	// [O]    Ptr to PROCESS_INFORMATION struct with new proc identification info
 	);
 	// ===========================================================================================
 	
