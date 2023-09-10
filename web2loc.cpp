@@ -15,9 +15,6 @@ wtxt bdir = WL("D:\\hw\\holywars.offline");
 //wtxt bdir = WL("D:\\vbox\\test.local");
 //wtxt bdir = L"D:\\vbox\\holywars.local";
 
-
-////// make programme quick title searche holyware + title+descript + IN EVERYTHING based on NPPFIF case insnsetive!
-
 #define INC_TYPES_S 1
 wtxt inc_types[INC_TYPES_S] = {
 	WL(".html")
@@ -231,7 +228,7 @@ void scan(const wtxt &dir)
 
 	do
 	{
-		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct mianpulated text back to 0!
+		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct manipulated text back to 0!
 		txtszu(fn);
 		
 		if((~fn == 1 && fn[0] == '.') || (~fn == 2 && fn[0] == '.' && fn[1] == '.'))
@@ -289,7 +286,7 @@ void scan(const wtxt &dir)
 	FindClose(ffind);
 	
 	txtclr(fnd_all);
-	txtsdt(fn, 0, 0, NULL); // Directly mianpulated text set back to 0 before it goes out of scope
+	txtsdt(fn, 0, 0, NULL); // Directly manipulated text set back to 0 before it goes out of scope
 }
 
 ui64a shifts = 256;
