@@ -994,7 +994,7 @@ void restoreImgExt(const wtxt &dir)
 
 	do
 	{
-		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct mianpulated text back to 0!
+		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct manipulated text back to 0!
 		txtszu(fn);
 		
 		if((~fn == 1 && fn[0] == '.') || (~fn == 2 && fn[0] == '.' && fn[1] == '.')) // Maybe not skip?
@@ -1050,7 +1050,7 @@ void restoreImgExt(const wtxt &dir)
 	FindClose(ffind);
 	
 	txtclr(fnd_all);
-	txtsdt(fn, 0, 0, NULL); // Directly mianpulated text set back to 0 before it goes out of scope
+	txtsdt(fn, 0, 0, NULL); // Directly manipulated text set back to 0 before it goes out of scope
 }
 
 wtxta indexes = 30000;
@@ -1081,7 +1081,7 @@ void removeNotImg(const wtxt &dir)
 
 	do
 	{
-		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct mianpulated text back to 0!
+		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct manipulated text back to 0!
 		txtszu(fn);
 		
 		if((~fn == 1 && fn[0] == '.') || (~fn == 2 && fn[0] == '.' && fn[1] == '.')) // Maybe not skip?
@@ -1114,7 +1114,7 @@ void removeNotImg(const wtxt &dir)
 	}
 	
 	txtclr(fnd_all);
-	txtsdt(fn, 0, 0, NULL); // Directly mianpulated text set back to 0 before it goes out of scope
+	txtsdt(fn, 0, 0, NULL); // Directly manipulated text set back to 0 before it goes out of scope
 }
 
 txt redir_failed = 4096;
@@ -1145,7 +1145,7 @@ void getAllRedirectFailLinks(const wtxt &dir)
 
 	do
 	{
-		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct mianpulated text back to 0!
+		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct manipulated text back to 0!
 		txtszu(fn);
 		
 		if((~fn == 1 && fn[0] == '.') || (~fn == 2 && fn[0] == '.' && fn[1] == '.')) // Maybe not skip?
@@ -1182,7 +1182,7 @@ void getAllRedirectFailLinks(const wtxt &dir)
 	fp|redir_failed|FC;
 	
 	txtclr(fnd_all);
-	txtsdt(fn, 0, 0, NULL); // Directly mianpulated text set back to 0 before it goes out of scope
+	txtsdt(fn, 0, 0, NULL); // Directly manipulated text set back to 0 before it goes out of scope
 }
 
 txta succ_links = 30000;		// All unique successfull links
@@ -1214,7 +1214,7 @@ void getAllFailedLinks(const wtxt &dir0, const wtxt &dir1)
 
 	do
 	{
-		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct mianpulated text back to 0!
+		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct manipulated text back to 0!
 		txtszu(fn);
 		
 		if((~fn == 1 && fn[0] == '.') || (~fn == 2 && fn[0] == '.' && fn[1] == '.')) // Maybe not skip?
@@ -1244,7 +1244,7 @@ void getAllFailedLinks(const wtxt &dir0, const wtxt &dir1)
 	FindClose(ffind);
 	
 	txtclr(fnd_all);
-	txtsdt(fn, 0, 0, NULL); // Directly mianpulated text set back to 0 before it goes out of scope
+	txtsdt(fn, 0, 0, NULL); // Directly manipulated text set back to 0 before it goes out of scope
 	
 	idx = 0;
 	fnd_all += dir1, fnd_all += star;
@@ -1267,7 +1267,7 @@ void getAllFailedLinks(const wtxt &dir0, const wtxt &dir1)
 
 	do
 	{
-		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct mianpulated text back to 0!
+		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct manipulated text back to 0!
 		txtszu(fn);
 		
 		if((~fn == 1 && fn[0] == '.') || (~fn == 2 && fn[0] == '.' && fn[1] == '.')) // Maybe not skip?
@@ -1336,7 +1336,7 @@ void getAllFailedLinks(const wtxt &dir0, const wtxt &dir1)
 	}
 	
 	txtclr(fnd_all);
-	txtsdt(fn, 0, 0, NULL); // Directly mianpulated text set back to 0 before it goes out of scope
+	txtsdt(fn, 0, 0, NULL); // Directly manipulated text set back to 0 before it goes out of scope
 }
 
 void getAllZeroSizeLinks(const wtxt &dir)
@@ -1365,7 +1365,7 @@ void getAllZeroSizeLinks(const wtxt &dir)
 
 	do
 	{
-		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct mianpulated text back to 0!
+		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct manipulated text back to 0!
 		txtszu(fn);
 		
 		if((~fn == 1 && fn[0] == '.') || (~fn == 2 && fn[0] == '.' && fn[1] == '.')) // Maybe not skip?
@@ -1396,7 +1396,7 @@ void getAllZeroSizeLinks(const wtxt &dir)
 	fp|redir_failed|FC;
 	
 	txtclr(fnd_all);
-	txtsdt(fn, 0, 0, NULL); // Directly mianpulated text set back to 0 before it goes out of scope
+	txtsdt(fn, 0, 0, NULL); // Directly manipulated text set back to 0 before it goes out of scope
 }
 
 //D:\vbox\holywars.ru\comments\11521\index.html
@@ -1433,7 +1433,7 @@ wtxt getImgFileName(const wtxt &id, const wtxt &idir)
 
 	do
 	{
-		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct mianpulated text back to 0!
+		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct manipulated text back to 0!
 		txtszu(fn);
 		
 		if((~fn == 1 && fn[0] == '.') || (~fn == 2 && fn[0] == '.' && fn[1] == '.')) // Maybe not skip?
@@ -1450,7 +1450,7 @@ wtxt getImgFileName(const wtxt &id, const wtxt &idir)
 		{
 			FindClose(ffind);
 			txtclr(fnd_all);
-			txtsdt(fn, 0, 0, NULL); // Directly mianpulated text set back to 0 before it goes out of scope
+			txtsdt(fn, 0, 0, NULL); // Directly manipulated text set back to 0 before it goes out of scope
 			return full_fn;
 		}
 		
@@ -1461,7 +1461,7 @@ wtxt getImgFileName(const wtxt &id, const wtxt &idir)
 	FindClose(ffind);
 	
 	txtclr(fnd_all);
-	txtsdt(fn, 0, 0, NULL); // Directly mianpulated text set back to 0 before it goes out of scope
+	txtsdt(fn, 0, 0, NULL); // Directly manipulated text set back to 0 before it goes out of scope
 	wtxt empty;
 	return empty;
 }
@@ -1593,7 +1593,7 @@ void restoreMirrorLinks(const wtxt &bdir, const wtxt &idir)
 
 	do
 	{
-		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct mianpulated text back to 0!
+		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct manipulated text back to 0!
 		txtszu(fn);
 		
 		if((~fn == 1 && fn[0] == '.') || (~fn == 2 && fn[0] == '.' && fn[1] == '.'))
@@ -1647,7 +1647,7 @@ void restoreMirrorLinks(const wtxt &bdir, const wtxt &idir)
 	p|N;
 	
 	txtclr(fnd_all);
-	txtsdt(fn, 0, 0, NULL); // Directly mianpulated text set back to 0 before it goes out of scope
+	txtsdt(fn, 0, 0, NULL); // Directly manipulated text set back to 0 before it goes out of scope
 }
 
 void loadSuccLinks(const wtxt &succ_dir)
@@ -1676,7 +1676,7 @@ void loadSuccLinks(const wtxt &succ_dir)
 
 	do
 	{
-		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct mianpulated text back to 0!
+		txtsdt(fn, MAX_PATH, 0, fdata.cFileName); // Always set direct manipulated text back to 0!
 		txtszu(fn);
 		
 		if((~fn == 1 && fn[0] == '.') || (~fn == 2 && fn[0] == '.' && fn[1] == '.')) // Maybe not skip?
@@ -1706,7 +1706,7 @@ void loadSuccLinks(const wtxt &succ_dir)
 	FindClose(ffind);
 	
 	txtclr(fnd_all);
-	txtsdt(fn, 0, 0, NULL); // Directly mianpulated text set back to 0 before it goes out of scope
+	txtsdt(fn, 0, 0, NULL); // Directly manipulated text set back to 0 before it goes out of scope
 }
 
 ui64 loadPureLinks()
