@@ -1,5 +1,7 @@
 // CONSOLE
 #include <stdp>
+// <stdp> is my custom console printer library. It is very low level, with minimal overhead and tones of features. It is optimised only for Windows.
+// You can get it here: https://github.com/ScienceDiscoverer/sd_std_libs
 
 #include <chrono>
 
