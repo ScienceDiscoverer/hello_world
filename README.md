@@ -6,3 +6,6 @@ Anyway, programming language is just like foreign language - only for talking wi
 
 2022 EDIT:
 I falied at learing Japanese... :cry:
+
+2025 EDIT:
+I failed at learning C++... And also English, apparently!
